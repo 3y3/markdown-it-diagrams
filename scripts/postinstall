@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PIP=$(command -v pip3) || $(command -v pip)
+INSTALL="install -qq"
+
+if [ -z "$PIP" ]; then
+  echo "Unable to install python libraries (pip not found)"
+  exit 1
+fi
+
+echo "-> Install python3 package: blockdiag"
+eval "$PIP $INSTALL blockdiag"
+echo "-> Install python3 package: actdiag"
+eval "$PIP $INSTALL actdiag"
+echo "-> Install python3 package: seqdiag"
+eval "$PIP $INSTALL seqdiag"
+echo "-> Install python3 package: nwdiag"
+eval "$PIP $INSTALL nwdiag"
