@@ -1,16 +1,6 @@
-const path = require('path');
-const execa = require('execa');
+'use strict';
 
-const diag = path.resolve(__dirname, 'diag.py');
-const exec = (script, ...opts) => {
-    const { stderr, stdout } = execa.sync(script, ...opts);
-
-    if (stderr) {
-        throw new Error(stderr);
-    }
-
-    return stdout;
-}
+const transform = require('./lib/transform');
 
 const Diagrams = ({
     types = [ 'blockdiag', 'actdiag', 'seqdiag', 'nwdiag', 'rackdiag', 'packetdiag' ],
@@ -26,9 +16,7 @@ const Diagrams = ({
         }
 
         try {
-            return exec(diag, [ token.info, '-' ], {
-                input: token.content
-            });
+            return transform(token.info, token.content);
         } catch (error) {
             if (ignoreErrors) {
                 return token.content;
@@ -39,4 +27,4 @@ const Diagrams = ({
     }
 };
 
-module.exports = { Diagrams };
+module.exports = { Diagrams, transform };

@@ -34,7 +34,7 @@ import rackdiag.parser
 
 from blockdiag.utils.bootstrap import Application, Options
 
-class Printer():
+class Printer:
     def __init__(self, drawer):
         class DiagramDraw(drawer.DiagramDraw):
             def save(self, size=None):
